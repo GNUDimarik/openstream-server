@@ -252,6 +252,7 @@ capture_e display_ram_t::snapshot(::platf::img_t *img_base, std::chrono::millise
     blend_cursor(cursor, *img);
   }
 
+  std::this_thread::sleep_for(20ms);
   return capture_e::ok;
 }
 
