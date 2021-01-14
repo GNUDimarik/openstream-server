@@ -28,17 +28,19 @@ display_ffmpeg_t::display_ffmpeg_t()
 
 capture_e display_ffmpeg_t::snapshot(img_t *img, std::chrono::milliseconds timeout, bool cursor_visible)
 {
-    BOOST_LOG(info) << __PRETTY_FUNCTION__;
-    //if (read_frame() == 0) {
-
-    //}
-
+  if (read_frame() == 0) {
+    img->width = width;
+    img->height = height;
+    img->row_pitch = row_pitch;
+    std::copy_n(current_frame->data[0], width * height * 4, img->data);
     return capture_e::ok;
+  }
+
+  return capture_e::error;
 }
 
 std::shared_ptr<img_t> display_ffmpeg_t::alloc_img()
 {
-  BOOST_LOG(info) << __PRETTY_FUNCTION__;
   auto img = std::make_shared<img_t>();
 
   img->pixel_pitch  = 4;
@@ -60,8 +62,9 @@ int display_ffmpeg_t::init()
   av_register_all();
   avdevice_register_all();
   avcodec_register_all();
-  //av_log_set_level(AV_LOG_DEBUG);
+  av_log_set_level(AV_LOG_DEBUG);
   video_stream_index = -1;
+  row_pitch = 4;
   int ret = 0;
   AVInputFormat *ifmt = av_find_input_format(kInputFormat);
 
@@ -129,8 +132,6 @@ int display_ffmpeg_t::init()
   log_flush();
 
   ret = read_frame();
-
-  BOOST_LOG(info) << __PRETTY_FUNCTION__ << " return " << ret;
   return ret;
 }
 
@@ -187,7 +188,6 @@ int display_ffmpeg_t::read_frame()
 
 out:
   av_packet_unref(&packet);
-  BOOST_LOG(info) << __PRETTY_FUNCTION__ << " ret == " << ret;
   return ret;
 }
 
