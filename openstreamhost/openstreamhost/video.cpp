@@ -1363,7 +1363,7 @@ platf::dev_type_e map_dev_type(AVHWDeviceType type) {
     case AV_HWDEVICE_TYPE_D3D11VA:
       return platf::dev_type_e::dxgi;
     case AV_PICTURE_TYPE_NONE:
-      return platf::dev_type_e::none;
+      return platf::dev_type_e::ffmpeg;
     default:
       return platf::dev_type_e::unknown;
   }

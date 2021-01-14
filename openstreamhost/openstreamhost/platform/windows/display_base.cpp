@@ -433,6 +433,13 @@ std::shared_ptr<display_t> display(dev_type_e hwdevice_type) {
       return disp;
     }
   }
+  else if(hwdevice_type == dev_type_e::ffmpeg) {
+    auto disp = std::make_shared<dxgi::display_ffmpeg_t>();
+
+    if(!disp->init()) {
+      return disp;
+    }
+  }
 
   return nullptr;
 }

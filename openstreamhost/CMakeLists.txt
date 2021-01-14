@@ -40,6 +40,7 @@ if(WIN32)
                 openstreamhost/platform/windows/display_base.cpp
                 openstreamhost/platform/windows/display_vram.cpp
                 openstreamhost/platform/windows/display_ram.cpp
+                openstreamhost/platform/windows/display_ffmpeg.cpp
                 openstreamhost/platform/windows/audio.cpp
 		ViGEmClient/src/ViGEmClient.cpp
 		ViGEmClient/include/ViGEm/Client.h

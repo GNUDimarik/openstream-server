@@ -14,6 +14,10 @@
 #include "openstreamhost/utility.h"
 #include "openstreamhost/platform/common.h"
 
+extern "C" {
+#include <libavformat/avformat.h>
+}
+
 namespace platf::dxgi {
 extern const char *format_str[];
 
@@ -111,6 +115,47 @@ public:
 
   gpu_cursor_t cursor;
   std::vector<hwdevice_t*> hwdevices;
+};
+
+///
+/// TODO: move this to common. FFmpeg screen grabber should be relevant for all platforms
+/// but no optimizations of course
+///
+/// After some investigations for working with AMF encoder with AMD it seems to me another
+/// screen grabbers acquire surface for a long time and it blocks GPU and encoder not able
+/// to encode a log of video and since we not able to control bitrate at the moment I think
+/// best way for now is implementation of ffmpeg screen grabber which I think no involves
+/// GPU at all but I didn't review whole code ...
+///
+/// AMF contributor gave this link as reference:
+/// https://github.com/GPUOpen-LibrariesAndSDKs/AMF/blob/master/amf/public/src/components/DisplayCapture/DDAPISource.cpp
+///
+
+class display_ffmpeg_t : public display_t, public std::enable_shared_from_this<display_ffmpeg_t> {
+public:
+  display_ffmpeg_t();
+  capture_e snapshot(img_t *img, std::chrono::milliseconds timeout, bool cursor_visible) override;
+
+  std::shared_ptr<img_t> alloc_img() override;
+  int dummy_img(img_t *img_base) override;
+
+  int init();
+  void release();
+  virtual ~display_ffmpeg_t();
+
+private:
+  /// I decided to not move here smart pointers logic from video.cpp since
+  /// this code needs to be refactored in future once we have a working
+  /// prototype with AMD hw encoder
+
+  int read_frame();
+  std::string error_message(int code);
+
+  AVFormatContext *av_fmt_ctx;
+  AVCodecContext *av_codec_ctx;
+  AVFrame *current_frame;
+  int row_pitch;
+  int video_stream_index;
 };
 }
 
