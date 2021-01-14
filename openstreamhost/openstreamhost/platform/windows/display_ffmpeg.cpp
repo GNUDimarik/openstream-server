@@ -3,6 +3,7 @@
 
 extern "C" {
 #include <libavdevice/avdevice.h>
+#include <libavutil/pixdesc.h>
 }
 
 using namespace platf;
@@ -28,9 +29,9 @@ display_ffmpeg_t::display_ffmpeg_t()
 capture_e display_ffmpeg_t::snapshot(img_t *img, std::chrono::milliseconds timeout, bool cursor_visible)
 {
     BOOST_LOG(info) << __PRETTY_FUNCTION__;
-    if (read_frame() == 0) {
+    //if (read_frame() == 0) {
 
-    }
+    //}
 
     return capture_e::ok;
 }
@@ -51,18 +52,17 @@ std::shared_ptr<img_t> display_ffmpeg_t::alloc_img()
 
 int display_ffmpeg_t::dummy_img(img_t * /* img_base */)
 {
-    BOOST_LOG(info) << __PRETTY_FUNCTION__;
     return 0;
 }
 
 int display_ffmpeg_t::init()
-{
+{    
   av_register_all();
   avdevice_register_all();
   avcodec_register_all();
-  av_log_set_level(AV_LOG_DEBUG);
-  BOOST_LOG(info) << __PRETTY_FUNCTION__;
+  //av_log_set_level(AV_LOG_DEBUG);
   video_stream_index = -1;
+  int ret = 0;
   AVInputFormat *ifmt = av_find_input_format(kInputFormat);
 
   if (ifmt == nullptr) {
@@ -70,10 +70,15 @@ int display_ffmpeg_t::init()
       return -1;
   }
 
-  if(avformat_open_input(&av_fmt_ctx, kInputDevice, ifmt, nullptr) != 0){
+  AVDictionary *opts = nullptr;
+  av_dict_set(&opts, "probesize", "42M", 0);
+
+  if(avformat_open_input(&av_fmt_ctx, kInputDevice, ifmt, &opts) != 0){
     BOOST_LOG(error) << "Couldn't open input device [" << kInputDevice << "] for input format [" << kInputFormat << "]";
     return -1;
   }
+
+  av_dict_free(&opts);
 
   if (avformat_find_stream_info(av_fmt_ctx, nullptr) < 0) {
     BOOST_LOG(error) << "Couldn't find stream info for input device [" << kInputDevice << "] of input format [" << kInputFormat << "]";
@@ -114,13 +119,23 @@ int display_ffmpeg_t::init()
     return -1;
   }
 
-  BOOST_LOG(info) << __PRETTY_FUNCTION__ << " return 0";
-  return 0;
+  current_frame = av_frame_alloc();
+
+  if (current_frame == nullptr) {
+      BOOST_LOG(error) << "Couldn't alloc frame";
+      return -1;
+  }
+
+  log_flush();
+
+  ret = read_frame();
+
+  BOOST_LOG(info) << __PRETTY_FUNCTION__ << " return " << ret;
+  return ret;
 }
 
 void display_ffmpeg_t::release()
 {
-  BOOST_LOG(info) << __PRETTY_FUNCTION__;
   if (av_fmt_ctx != nullptr) {
     avformat_close_input(&av_fmt_ctx);
     av_fmt_ctx = nullptr;
@@ -149,26 +164,20 @@ display_ffmpeg_t::~display_ffmpeg_t()
 
 int display_ffmpeg_t::read_frame()
 {
-  current_frame = av_frame_alloc();
-
-  AVPacket *packet = nullptr;
-  av_init_packet(packet);
+  AVPacket packet;
+  av_init_packet(&packet);
   int ret = 0;
 
-  while (true) {
-    if ((ret = av_read_frame(av_fmt_ctx, packet)) < 0) {
-      BOOST_LOG(error) << "Could not read frame [" << error_message(ret) + "]";
-      goto out;
-    }
-
-    if (packet->stream_index == video_stream_index) {
-      break;
-    }
+  if ((ret = av_read_frame(av_fmt_ctx, &packet)) < 0) {
+    BOOST_LOG(error) << "Could not read frame [" << error_message(ret) + "]";
+    goto out;
   }
 
-  if ((ret = avcodec_send_packet(av_codec_ctx, packet)) == 0) {
+  if ((ret = avcodec_send_packet(av_codec_ctx, &packet)) == 0) {
     if ((ret = avcodec_receive_frame(av_codec_ctx, current_frame)) == 0) {
        row_pitch = current_frame->linesize[0];
+       width = current_frame->width;
+       height = current_frame->height;
     } else {
       BOOST_LOG(error) << "Could not receive frame [" << error_message(ret) + "]";
     }
@@ -177,7 +186,7 @@ int display_ffmpeg_t::read_frame()
   }
 
 out:
-  av_packet_free(&packet);
+  av_packet_unref(&packet);
   BOOST_LOG(info) << __PRETTY_FUNCTION__ << " ret == " << ret;
   return ret;
 }
