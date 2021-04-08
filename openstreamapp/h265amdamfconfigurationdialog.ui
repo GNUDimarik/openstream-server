@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>245</height>
+    <width>615</width>
+    <height>544</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -431,6 +431,559 @@ subcontrol-origin: margin;
 }
 
 </string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="gops_per_idr">
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+       <property name="text">
+        <string>gops_per_idr</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="h265_gops_per_idr">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="g">
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+       <property name="text">
+        <string>g</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="h265_g">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_12">
+     <item>
+      <widget class="QLabel" name="rcs">
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+       <property name="text">
+        <string>rcs</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="h265_rcs">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="qmin">
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+       <property name="text">
+        <string>qmin</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="h265_qmin">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_10">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_11">
+       <item>
+        <widget class="QLabel" name="qmax">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+         </property>
+         <property name="text">
+          <string>qmax</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="h265_qmax">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="b">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+         </property>
+         <property name="text">
+          <string>b</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="h265_b">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_6">
+     <item>
+      <widget class="QLabel" name="maxrates">
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+       <property name="text">
+        <string>maxrates</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="h265_maxrates">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="bufsize">
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+       <property name="text">
+        <string>bufsize</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="h265_bufsize">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="min_qp_i">
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+       <property name="text">
+        <string>min_qp_i</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="h265_min_qp_i">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="max_qp_i">
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+       <property name="text">
+        <string>max_qp_i</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="h265_max_qp_i">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QLabel" name="min_qp_p">
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+       <property name="text">
+        <string>min_qp_p</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="h265_min_qp_p">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="max_qp_p">
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+       <property name="text">
+        <string>max_qp_p</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="h265_max_qp_p">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_13">
+     <item>
+      <widget class="QLabel" name="level">
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+       <property name="text">
+        <string>level</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="h265_level">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="header_insertion_mode">
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
+       </property>
+       <property name="text">
+        <string>header_insertion_mode</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="h265_header_insertion_mode">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+color: rgb(255, 255, 255);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}
+
+QToolTip {
+color: rgb(0, 0, 0);
+font:  &quot;Open Sans Semibold&quot;;
+font-size: 12px;
+}</string>
        </property>
       </widget>
      </item>

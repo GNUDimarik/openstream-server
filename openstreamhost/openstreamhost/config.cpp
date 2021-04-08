@@ -113,7 +113,21 @@ video_t video {
   {
     "speed",
     "cbr",
-    "20000"
+    "20000",
+    "30",
+    "30",
+    "cqp",
+    "0",
+    "51",
+    "1000000",
+    "1000000",
+    "1000000",
+    "-1",
+    "-1",
+    "-1",
+    "-1",
+    "4.1",
+    "none"
   }// output_name
 };
 
@@ -383,6 +397,21 @@ void apply_config(std::unordered_map<std::string, std::string> &&vars) {
   string_f(vars, "amf_quality", video.amf.quality);
   string_f(vars, "amf_rc", video.amf.rc);
   string_f(vars, "amf_maxrate", video.amf.maxrate);
+
+  string_f(vars, "amf_gops_per_idr", video.amf.gops_per_idr);
+  string_f(vars, "amf_g", video.amf.g);
+  string_f(vars, "amf_rcs", video.amf.rcs);
+  string_f(vars, "amf_qmin", video.amf.qmin);
+  string_f(vars, "amf_qmax", video.amf.qmax);
+  string_f(vars, "amf_b", video.amf.b);
+  string_f(vars, "amf_maxrates", video.amf.maxrates);
+  string_f(vars, "amf_bufsize", video.amf.bufsize);
+  string_f(vars, "amf_min_qp_i", video.amf.min_qp_i);
+  string_f(vars, "amf_max_qp_i", video.amf.max_qp_i);
+  string_f(vars, "amf_min_qp_p", video.amf.min_qp_p);
+  string_f(vars, "amf_max_qp_p", video.amf.max_qp_p);
+  string_f(vars, "amf_level", video.amf.level);
+  string_f(vars, "amf_header_insertion_mode", video.amf.header_insertion_mode);
 
   string_f(vars, "pkey", nvhttp.pkey);
   string_f(vars, "cert", nvhttp.cert);

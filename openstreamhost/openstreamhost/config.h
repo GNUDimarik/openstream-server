@@ -50,6 +50,20 @@ struct video_t {
    std::string quality;
    std::string rc;
    std::string maxrate;
+   std::string gops_per_idr;
+   std::string g;
+   std::string rcs;
+   std::string qmin;
+   std::string qmax;
+   std::string b;
+   std::string maxrates;
+   std::string bufsize;
+   std::string min_qp_i;
+   std::string max_qp_i;
+   std::string min_qp_p;
+   std::string max_qp_p;
+   std::string level;
+   std::string header_insertion_mode;
   } amf;
 };
 

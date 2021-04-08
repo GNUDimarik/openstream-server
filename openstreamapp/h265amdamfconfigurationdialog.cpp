@@ -226,14 +226,84 @@ void h265AMDAMFConfigurationDialog::on_h265_amd_amf_ok_button_clicked()
         config->setEntry("amf_maxrate", ENCODER_MAXRATE_80);
     }
 
+    QString selected_gops_per_idr = ui->h265_gops_per_idr->text();
+    config->setEntry("amf_gops_per_idr", selected_gops_per_idr);
+
+    QString selected_g = ui->h265_g->text();
+    config->setEntry("amf_g", selected_g);
+
+    QString selected_rcs = ui->h265_rcs->text();
+    config->setEntry("amf_rcs", selected_rcs);
+
+    QString selected_qmin = ui->h265_qmin->text();
+    config->setEntry("amf_qmin", selected_qmin);
+
+    QString selected_qmax = ui->h265_qmax->text();
+    config->setEntry("amf_qmax", selected_qmax);
+
+    QString selected_b = ui->h265_b->text();
+    config->setEntry("amf_b", selected_b);
+
+    QString selected_maxrates = ui->h265_maxrates->text();
+    config->setEntry("amf_maxrates", selected_maxrates);
+
+    QString selected_bufsize = ui->h265_bufsize->text();
+    config->setEntry("amf_bufsize", selected_bufsize);
+
+    QString selected_min_qp_i = ui->h265_min_qp_i->text();
+    config->setEntry("amf_min_qp_i", selected_min_qp_i);
+
+    QString selected_max_qp_i = ui->h265_max_qp_i->text();
+    config->setEntry("amf_max_qp_i", selected_max_qp_i);
+
+    QString selected_min_qp_p = ui->h265_min_qp_p->text();
+    config->setEntry("amf_min_qp_p", selected_min_qp_p);
+
+    QString selected_max_qp_p = ui->h265_max_qp_p->text();
+    config->setEntry("amf_max_qp_p", selected_max_qp_p);
+
+    QString selected_qp = ui->h265_level->text();
+    config->setEntry("amf_level", selected_qp);
+
+    QString selected_header_insertion_mode = ui->h265_header_insertion_mode->text();
+    config->setEntry("amf_header_insertion_mode", selected_header_insertion_mode);
+
     if(entries_snapshot.value("amf_quality") != config->getKey("amf_quality") ||
        entries_snapshot.value("amf_rc") != config->getKey("amf_rc") ||
-       entries_snapshot.value("amf_maxrate") != config->getKey("amf_maxrate")
+       entries_snapshot.value("amf_maxrate") != config->getKey("amf_maxrate") ||
+       entries_snapshot.value("amf_gops_per_idr") != config->getKey("amf_gops_per_idr") ||
+       entries_snapshot.value("amf_g") != config->getKey("amf_g") ||
+       entries_snapshot.value("amf_rcs") != config->getKey("amf_rcs") ||
+       entries_snapshot.value("amf_qmin") != config->getKey("amf_qmin") ||
+       entries_snapshot.value("amf_qmax") != config->getKey("amf_qmax") ||
+       entries_snapshot.value("amf_b") != config->getKey("amf_b") ||
+       entries_snapshot.value("amf_maxrates") != config->getKey("amf_maxrates") ||
+       entries_snapshot.value("amf_bufsize") != config->getKey("amf_bufsize") ||
+       entries_snapshot.value("amf_min_qp_i") != config->getKey("amf_min_qp_i") ||
+       entries_snapshot.value("amf_max_qp_i") != config->getKey("amf_max_qp_i") ||
+       entries_snapshot.value("amf_min_qp_p") != config->getKey("amf_min_qp_p") ||
+       entries_snapshot.value("amf_max_qp_p") != config->getKey("amf_max_qp_p") ||
+       entries_snapshot.value("amf_level") != config->getKey("amf_level") ||
+       entries_snapshot.value("amf_header_insertion_mode") != config->getKey("amf_header_insertion_mode")
       ) {
          config->saveConfiguration();
          entries_snapshot.insert("amf_quality", config->getKey("amf_quality"));
          entries_snapshot.insert("amf_rc", config->getKey("amf_rc"));
          entries_snapshot.insert("amf_maxrate", config->getKey("amf_maxrate"));
+         entries_snapshot.insert("amf_gops_per_idr", config->getKey("amf_gops_per_idr"));
+         entries_snapshot.insert("amf_g", config->getKey("amf_g"));
+         entries_snapshot.insert("amf_rcs", config->getKey("amf_rcs"));
+         entries_snapshot.insert("amf_qmin", config->getKey("amf_qmin"));
+         entries_snapshot.insert("amf_qmax", config->getKey("amf_qmax"));
+         entries_snapshot.insert("amf_b", config->getKey("amf_b"));
+         entries_snapshot.insert("amf_maxrates", config->getKey("amf_maxrates"));
+         entries_snapshot.insert("amf_bufsize", config->getKey("amf_bufsize"));
+         entries_snapshot.insert("amf_min_qp_i", config->getKey("amf_min_qp_i"));
+         entries_snapshot.insert("amf_max_qp_i", config->getKey("amf_max_qp_i"));
+         entries_snapshot.insert("amf_min_qp_p", config->getKey("amf_min_qp_p"));
+         entries_snapshot.insert("amf_max_qp_p", config->getKey("amf_max_qp_p"));
+         entries_snapshot.insert("amf_level", config->getKey("amf_level"));
+         entries_snapshot.insert("amf_header_insertion_mode", config->getKey("amf_header_insertion_mode"));
          emit configuration_changed(h265AMDAMF);
     }
     this->hide();

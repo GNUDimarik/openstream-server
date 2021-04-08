@@ -299,15 +299,12 @@ encoder_t amfenc {
     AV_PIX_FMT_YUV420P, AV_PIX_FMT_YUV420P,
   {
     {
-      { "header_insertion_mode"s, "idr"s },
-      { "gops_per_idr"s, 30 },
-      { "rc"s, "cqp"s },
-      { "qp"s, "23"s},
+      { "rc"s, &config::video.amf.rcs },                    //"cqp" (use qmin/qmax, qp_i/qp_p != -1), "vbr_peak" (rc_max_rate > 0), else "cbr" (max_rate = 0, "qp -1")
+      { "maxrate", &config::video.amf.maxrates },           //80% of bandwidth (default 0)
+      { "max_qp_i", &config::video.amf.max_qp_i },          // -1 -> qmax (any, to turn on cqp)
+      { "max_qp_p", &config::video.amf.max_qp_p },          // -1 -> qmax (any, to turn on cqp)
       { "usage"s, "ultralowlatency"s },
-      { "quality"s, &config::video.amf.quality },
-      { "b:v", &config::video.amf.maxrate },
-      { "maxrate", &config::video.amf.maxrate },
-      { "bufsize", &config::video.amf.maxrate }
+      { "quality"s, "speed"s },
     },
     std::nullopt,  std::make_optional<encoder_t::option_t>("qp"s, &config::video.qp),
     "hevc_amf"s,
