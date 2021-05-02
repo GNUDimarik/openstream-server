@@ -133,6 +133,20 @@ int coder_from_view(const std::string_view &coder) {
 
   return -1;
 }
+
+std::string quality_from_quality_e(quality_e q)
+{
+    switch (q) {
+    case speed:
+      return "speed";
+
+    case balanced:
+      return "balanced";
+
+    default:
+      return "quality";
+    }
+}
 } // namespace amd
 
 video_t video {
@@ -426,9 +440,16 @@ void apply_config(std::unordered_map<std::string, std::string> &&vars) {
   string_f(vars, "adapter_name", video.adapter_name);
   string_f(vars, "output_name", video.output_name);
 
+  auto it = vars.find("amf_quality");
+
+  if (it != vars.end()) {
+    video.amd.quality_str = std::move(it->second);
+  }
+
   int_f(vars, "amf_quality", video.amd.quality, amd::quality_from_view);
   int_f(vars, "amf_rc", video.amd.rc, amd::rc_from_view);
   int_f(vars, "amf_coder", video.amd.coder, amd::coder_from_view);
+  int_f(vars, "amf_maxrate", video.amd.maxrate);
 
   string_f(vars, "pkey", nvhttp.pkey);
   string_f(vars, "cert", nvhttp.cert);
@@ -515,7 +536,8 @@ void apply_config(std::unordered_map<std::string, std::string> &&vars) {
     }
   }
 
-  auto it = vars.find("flags"s);
+  it = vars.find("flags"s);
+
   if(it != std::end(vars)) {
     apply_flags(it->second.c_str());
 

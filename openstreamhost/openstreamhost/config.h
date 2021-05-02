@@ -44,8 +44,10 @@ struct video_t {
 
   struct {
     std::optional<int> quality;
+    std::string quality_str;
     std::optional<int> rc;
     int coder;
+    int maxrate;
   } amd;
 
   std::string encoder;

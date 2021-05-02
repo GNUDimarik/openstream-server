@@ -312,13 +312,14 @@ static encoder_t amfenc {
   { (int)amd::profile_h264_e::high, (int)amd::profile_hevc_e::main },
   AV_HWDEVICE_TYPE_D3D11VA,
   AV_PIX_FMT_D3D11,
-  AV_PIX_FMT_NV12, AV_PIX_FMT_YUV420P,
+  AV_PIX_FMT_NV12, AV_PIX_FMT_NV12,
   {
     {
       { "header_insertion_mode"s, "idr"s },
       { "gops_per_idr"s, 30 },
       { "usage"s, "ultralowlatency"s },
-      { "quality"s, &config::video.amd.quality },
+      { "quality"s, &config::video.amd.quality_str },
+      { "maxrate", &config::video.amd.maxrate },
       { "rc"s, &config::video.amd.rc }
     },
     std::nullopt, std::make_optional<encoder_t::option_t>({"qp"s, &config::video.qp}),
@@ -327,8 +328,9 @@ static encoder_t amfenc {
   {
     {
       { "usage"s, "ultralowlatency"s },
-      { "quality"s, &config::video.amd.quality },
+      { "quality"s, &config::video.amd.quality_str },
       { "rc"s, &config::video.amd.rc },
+      { "maxrate", &config::video.amd.maxrate },
       {"log_to_dbg"s,"1"s},
     },
     std::nullopt, std::make_optional<encoder_t::option_t>({"qp"s, &config::video.qp}),
