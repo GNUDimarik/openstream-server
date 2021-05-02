@@ -83,7 +83,57 @@ int coder_from_view(const std::string_view &coder) {
 
   return -1;
 }
+} // namespace nv
+
+namespace amd {
+enum quality_e : int {
+  _default = 0,
+  speed = 10,
+  balanced = 5,
+  best = 0,
+};
+
+enum rc_e : int {
+  cqp         = 0,       /**< Peak Contrained Variable Bitrate */
+  vbr_peak    = 2,       /**< Variable bitrate mode */
+  cbr         = 3,       /**< Peak Contrained Variable Bitrate */
+  vbr_latency = 1,       /**< Latency Constrained Variable Bitrate */
+};
+
+enum coder_e : int {
+  _auto = 0,
+  cabac,
+  cavlc
+};
+
+std::optional<quality_e> quality_from_view(const std::string_view &quality) {
+#define _CONVERT_(x) if(quality == #x##sv) return x
+  _CONVERT_(speed);
+  _CONVERT_(balanced);
+  _CONVERT_(best);
+  if(quality == "default"sv) return _default;
+#undef _CONVERT_
+  return std::nullopt;
 }
+
+std::optional<rc_e> rc_from_view(const std::string_view &rc) {
+#define _CONVERT_(x) if(rc == #x##sv) return x
+  _CONVERT_(cqp);
+  _CONVERT_(vbr_peak);
+  _CONVERT_(cbr);
+  _CONVERT_(vbr_latency);
+#undef _CONVERT_
+  return std::nullopt;
+}
+
+int coder_from_view(const std::string_view &coder) {
+  if(coder == "auto"sv) return _auto;
+  if(coder == "cabac"sv  || coder == "ac"sv) return cabac;
+  if(coder == "cavlc"sv  || coder == "vlc"sv) return cavlc;
+
+  return -1;
+}
+} // namespace amd
 
 video_t video {
   0, // crf
@@ -110,11 +160,7 @@ video_t video {
   {}, // encoder
   {}, // adapter_name
   {},
-  {
-    "speed",
-    "cbr",
-    "20000"
-  }// output_name
+  {}// output_name
 };
 
 audio_t audio {};
@@ -380,9 +426,9 @@ void apply_config(std::unordered_map<std::string, std::string> &&vars) {
   string_f(vars, "adapter_name", video.adapter_name);
   string_f(vars, "output_name", video.output_name);
 
-  string_f(vars, "amf_quality", video.amf.quality);
-  string_f(vars, "amf_rc", video.amf.rc);
-  string_f(vars, "amf_maxrate", video.amf.maxrate);
+  int_f(vars, "amf_quality", video.amd.quality, amd::quality_from_view);
+  int_f(vars, "amf_rc", video.amd.rc, amd::rc_from_view);
+  int_f(vars, "amf_coder", video.amd.coder, amd::coder_from_view);
 
   string_f(vars, "pkey", nvhttp.pkey);
   string_f(vars, "cert", nvhttp.cert);
